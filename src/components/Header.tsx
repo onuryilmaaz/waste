@@ -43,13 +43,16 @@ const Header = () => {
                       </span>
                     </div>
                     {index < steps.length - 1 && (
-                      <div
-                        className={`mx-2 lg:mx-3 w-4 lg:w-8 h-0.5 rounded-full ${
-                          index < steps.findIndex((s) => s.id === "select-skip")
-                            ? "bg-green-500"
-                            : "bg-gray-600"
-                        }`}
-                      ></div>
+                      <div className="flex items-center h-full">
+                        <div
+                          className={`lg:ml-8 lg:mx-3 w-4 lg:w-8 h-0.5 rounded-full ${
+                            index <
+                            steps.findIndex((s) => s.id === "select-skip")
+                              ? "bg-green-500"
+                              : "bg-gray-600"
+                          }`}
+                        ></div>
+                      </div>
                     )}
                   </li>
                 ))}

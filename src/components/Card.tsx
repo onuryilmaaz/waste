@@ -9,116 +9,129 @@ const Card: React.FC<{
 }> = ({ skip, isSelected, onSelect }) => {
   return (
     <div
-      className={`relative max-w-sm w-full cursor-pointer transition-all duration-500 transform ${
-        isSelected
-          ? "scale-105 shadow-3xl shadow-blue-500/40 z-0"
-          : "hover:scale-102 hover:shadow-xl z-0"
+      className={`relative w-full max-w-xl cursor-pointer transition-all duration-300 ${
+        isSelected ? "scale-105" : "hover:scale-102"
       }`}
       onClick={() => onSelect(skip)}
     >
       <div
-        className={`bg-white rounded-2xl shadow-lg border-2 transition-all duration-300 overflow-hidden ${
+        className={`bg-white rounded-2xl shadow-md border transition-all duration-300 overflow-hidden ${
           isSelected
-            ? "border-blue-600 bg-blue-50"
-            : "border-gray-200 hover:border-blue-300"
+            ? "border-blue-500 shadow-xl shadow-blue-100"
+            : "border-gray-100 hover:border-gray-200 hover:shadow-lg"
         }`}
       >
-        <div
-          className={`relative p-4 transition-all duration-300 ${
-            isSelected
-              ? "bg-gradient-to-br from-blue-600 to-blue-700 text-white"
-              : "bg-amber-400 text-white"
-          }`}
-        >
+        {/* Header */}
+        <div className="relative px-6 py-4 bg-gradient-to-br from-gray-50 to-gray-100">
           <div className="flex items-center justify-between">
-            <h3 className="text-xl font-extrabold">{skip.size} Yard Skip</h3>
+            <div>
+              <h3 className="text-xl font-bold text-gray-900">{skip.size}</h3>
+              <p className="text-sm text-gray-600 font-medium">Yard Skip</p>
+            </div>
             <div
-              className={`w-10 h-10 rounded-full border-3 border-white flex items-center justify-center transition-all duration-300 ${
-                isSelected ? "bg-white" : "bg-transparent"
+              className={`w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 ${
+                isSelected
+                  ? "bg-blue-500 scale-110"
+                  : "bg-gray-200 border-2 border-gray-300"
               }`}
             >
-              {isSelected && <Check className="w-6 h-6 text-blue-600" />}
+              {isSelected && <Check className="w-4 h-4 text-white" />}
             </div>
           </div>
         </div>
-        <div className="bg-gray-100 py-8 px-6 flex justify-center items-center">
-          <div className="relative">
+
+        {/* Image Section */}
+        <div className="relative p-6 bg-gray-50">
+          <div className="flex justify-center">
             <img
               src={yard4}
               alt={`${skip.size} Yard Skip`}
-              className="max-h-32 object-contain"
+              className="w-full h-full object-contain"
             />
+          </div>
 
-            <div
-              className={`absolute -bottom-4 -right-4 ${
-                skip.allows_heavy_waste ? "bg-green-500" : "bg-red-500"
-              }  text-white text-sm font-bold px-3 py-1 rounded-full shadow-lg`}
+          {/* Waste Type Badge */}
+          <div className="absolute top-4 right-4">
+            <span
+              className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold ${
+                skip.allows_heavy_waste
+                  ? "bg-emerald-100 text-emerald-800"
+                  : "bg-orange-100 text-orange-800"
+              }`}
             >
               {skip.allows_heavy_waste ? "Heavy Waste" : "Light Waste"}
-            </div>
+            </span>
           </div>
         </div>
-        <div className="p-6">
-          <div className="grid grid-cols-2 gap-4 mb-6 text-gray-700">
-            <div className="text-center flex flex-col items-center">
-              <Clock className="w-6 h-6 text-blue-500 mb-2" />
-              <div className="text-base font-semibold">
-                {skip.hire_period_days} Days
+
+        {/* Content */}
+        <div className="p-6 space-y-4">
+          {/* Stats */}
+          <div className="grid grid-cols-2 gap-4">
+            <div className="text-center">
+              <div className="flex justify-center mb-1">
+                <Clock className="w-5 h-5 text-gray-400" />
               </div>
-              <div className="text-xs text-gray-500">Hire Period</div>
+              <div className="text-base font-semibold text-gray-900">
+                {skip.hire_period_days}
+              </div>
+              <div className="text-xs text-gray-500">Days</div>
             </div>
-            <div className="text-center flex flex-col items-center">
-              <Ruler className="w-6 h-6 text-blue-500 mb-2" />
-              <div className="text-base font-semibold">
+            <div className="text-center">
+              <div className="flex justify-center mb-2">
+                <Ruler className="w-5 h-5 text-gray-400" />
+              </div>
+              <div className="text-base font-semibold text-gray-900">
                 {skip.area || `${skip.size}yd³`}
               </div>
-              <div className="text-xs text-gray-500">Dimensions</div>
+              <div className="text-xs text-gray-500">Size</div>
             </div>
           </div>
-          <div
-            className={`p-2 rounded-xl ${
-              skip.allowed_on_road ? "bg-green-500" : "bg-yellow-500"
-            }  text-white text-sm items-center justify-center flex space-x-2 mb-4`}
-          >
-            {skip.allows_heavy_waste ? (
-              ""
-            ) : (
-              <Truck className="w-4 h-4 text-white text-sm" />
-            )}
-            <span className="font-semibold"></span>
-            {skip.allows_heavy_waste
-              ? "Allowed On The Road"
-              : "Not Allowed On The Road"}
+
+          {/* Road Permission */}
+          <div className="text-center">
+            <div
+              className={`inline-flex items-center px-4 py-2 rounded-full text-sm font-medium ${
+                skip.allowed_on_road
+                  ? "bg-green-50 text-green-700 border border-green-200"
+                  : "bg-red-50 text-red-700 border border-red-200"
+              }`}
+            >
+              <Truck className="w-4 h-4 mr-2" />
+              {skip.allowed_on_road ? "Road Allowed" : "Private Land Only"}
+            </div>
           </div>
-          <div className="bg-blue-50 rounded-xl p-4 mb-6 border border-blue-200">
+
+          {/* Pricing */}
+          <div className="bg-gray-50 rounded-2xl p-4">
             <div className="flex items-baseline justify-between">
               <div>
-                <span className="text-4xl font-extrabold text-blue-700">
+                <span className="text-3xl font-bold text-gray-900">
                   ${skip.price_before_vat}
                 </span>
-                <span className="text-blue-500 ml-2 text-lg font-medium">
-                  inc VAT
-                </span>
+                <span className="text-gray-500 ml-2 text-sm">inc VAT</span>
               </div>
-              <div className="text-right text-sm text-blue-600 font-semibold">
-                <div>
-                  From $
+              <div className="text-right">
+                <div className="text-sm text-gray-600">
+                  $
                   {Math.round(
                     (skip.price_before_vat / skip.hire_period_days) * 100
                   ) / 100}
-                  /day
+                  <span className="text-gray-400">/day</span>
                 </div>
               </div>
             </div>
           </div>
+
+          {/* Action Button */}
           <button
-            className={`w-full py-4 px-4 rounded-xl font-bold text-lg transition-all duration-300 transform hover:scale-100 ${
+            className={`w-full py-4 rounded-2xl font-semibold text-lg transition-all duration-200 ${
               isSelected
-                ? "bg-green-600 text-white shadow-lg shadow-green-500/30"
-                : "bg-blue-600 hover:bg-blue-700 text-white shadow-lg shadow-blue-500/30"
+                ? "bg-blue-500 text-white hover:bg-blue-600 shadow-md"
+                : "bg-gray-900 text-white hover:bg-gray-800 shadow-md"
             }`}
           >
-            {isSelected ? "Selected ✓" : "Select This Skip"}
+            {isSelected ? "Selected ✓" : "Select Skip"}
           </button>
         </div>
       </div>
