@@ -148,24 +148,6 @@ waste/
 └── README.md            # Project documentation
 ```
 
-## 🔧 Configuration
-
-### Environment Variables
-
-The application currently connects to the API endpoint:
-
-```
-https://app.wewantwaste.co.uk/api/skips/by-location?postcode=NR32&area=Lowestoft
-```
-
-To configure different API endpoints or add environment-specific settings, create a `.env` file in the root directory:
-
-```env
-VITE_API_BASE_URL=https://your-api-endpoint.com
-VITE_DEFAULT_POSTCODE=NR32
-VITE_DEFAULT_AREA=Lowestoft
-```
-
 ### Tailwind CSS Customization
 
 The project includes custom Tailwind configurations in `tailwind.config.js`:
