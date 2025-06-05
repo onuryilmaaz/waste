@@ -5,6 +5,8 @@ import type { ApiSkipResponse, Skip } from "../types/Skip";
 import Footer from "../components/Footer";
 import FilterAndSearch from "../components/FilterAndSearch";
 import { motion, AnimatePresence } from "framer-motion";
+import { Search, AlertCircle } from "lucide-react";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 const ChooseSkipSizePage = () => {
   const [data, setData] = useState<ApiSkipResponse[] | null>(null);
@@ -112,32 +114,33 @@ const ChooseSkipSizePage = () => {
   });
 
   if (loading) {
-    return (
-      <div className="flex justify-center items-center h-screen text-lg font-medium text-gray-700">
-        Veriler yükleniyor...
-      </div>
-    );
+    return <LoadingSpinner />;
   }
 
   if (error) {
     return (
-      <div className="flex justify-center items-center h-screen text-lg font-medium text-red-600">
-        Hata oluştu: {error.message}
+      <div className="min-h-screen flex justify-center items-center bg-black">
+        <div className="text-center max-w-md mx-auto p-8">
+          <div className="w-16 h-16 bg-gradient-to-r from-red-400 to-rose-500 rounded-3xl flex items-center justify-center mb-6 mx-auto shadow-xl">
+            <AlertCircle className="w-8 h-8 text-white" />
+          </div>
+          <h3 className="text-2xl font-bold text-slate-800 mb-4">
+            Oops! Something went wrong
+          </h3>
+          <p className="text-slate-600 mb-6">
+            We couldn't load the skip data. Please try again later.
+          </p>
+          <p className="text-sm text-red-600 bg-red-50 rounded-2xl p-4 border border-red-200">
+            Error: {error.message}
+          </p>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-black">
+    <div className="min-h-screen bg-black">
       <main className="flex-grow container mx-auto p-4 py-8 pb-24">
-        <h1 className="text-4xl font-extrabold mb-8 text-center text-white">
-          Choose Your Skip Size
-        </h1>
-        <p className="text-center text-gray-400 mb-10 max-w-2xl mx-auto">
-          Select the perfect skip for your waste disposal needs. All prices
-          include VAT.
-        </p>
-
         <FilterAndSearch
           onSearchChange={setSearchQuery}
           onHeavyWasteFilterChange={setHeavyWasteFilter}
@@ -157,17 +160,19 @@ const ChooseSkipSizePage = () => {
 
         <div
           ref={skipCardsContainerRef}
-          className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center"
+          className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 justify-items-center"
         >
           <AnimatePresence mode="wait">
             {filteredSkips && filteredSkips.length > 0 ? (
               filteredSkips.map((skip) => (
                 <motion.div
                   key={skip.id}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
-                  transition={{ duration: 0.3 }}
+                  initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.9, y: -20 }}
+                  transition={{ duration: 0.4, ease: "easeOut" }}
+                  whileHover={{ y: -5 }}
+                  className="w-full"
                 >
                   <SkipCard
                     skip={skip}
@@ -183,9 +188,19 @@ const ChooseSkipSizePage = () => {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.3 }}
-                className="col-span-full text-center text-gray-500 text-xl py-10"
+                className="col-span-full text-center py-16"
               >
-                Hiç konteyner bulunamadı.
+                <div className="bg-white backdrop-blur-sm rounded-3xl p-12 shadow-xl border border-gray-200 max-w-md mx-auto">
+                  <div className="w-16 h-16 bg-gradient-to-r from-gray-100 to-gray-200 rounded-full mx-auto mb-6 flex items-center justify-center">
+                    <Search className="w-8 h-8 text-gray-400" />
+                  </div>
+                  <h3 className="text-xl font-semibold text-gray-700 mb-2">
+                    No Skips Found
+                  </h3>
+                  <p className="text-gray-500">
+                    Try adjusting your filters to find more options.
+                  </p>
+                </div>
               </motion.div>
             )}
           </AnimatePresence>
