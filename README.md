@@ -1,137 +1,297 @@
-# Waste Management Platform
+# Waste Management Skip Rental Application
 
-A modern React application built with TypeScript and Vite for waste management services. This platform provides a streamlined multi-step process for users to book waste collection services.
+A modern, responsive React-based web application for browsing and selecting waste management skips. This application provides an intuitive interface for users to search, filter, and select appropriate skip sizes for their waste disposal needs.
 
-## 🚀 Features
+## 🚀 Live Demo
 
-### Multi-Step Progress Header
+Browse available skips by location and find the perfect waste disposal solution for your needs.
 
-- **6-Step Process**: Postcode → Waste Type → Select Skip → Permit Check → Choose Date → Payment
-- **Visual Progress Indicator**: Real-time step tracking with icons and progress bars
-- **Responsive Design**: Optimized for mobile, tablet, and desktop devices
-- **Modern UI**: Clean black background with white elements for better contrast
+## ✨ Features
 
-### Performance Optimizations
+### Core Functionality
 
-- **React Hooks Optimization**: Implemented `useMemo` for preventing unnecessary re-renders
-- **Smooth Animations**: Optimized CSS transitions for lag-free user experience
-- **Memory Efficient**: Cached computations to reduce component re-rendering
+- **Skip Browsing**: View available skips with detailed information including size, pricing, and availability
+- **Advanced Filtering**: Filter skips by heavy waste allowance, road permission, price range, and yard size
+- **Real-time Search**: Search skips by size, area, or waste type capabilities
+- **Interactive UI**: Modern card-based interface with smooth animations and transitions
+- **Responsive Design**: Fully responsive design that works seamlessly across all devices
 
-## 🛠️ Tech Stack
+### User Experience
 
-- **React 18** with TypeScript
-- **Vite** for fast development and building
-- **Tailwind CSS** for styling
-- **Lucide React** for icons
-- **ESLint** for code linting
+- **Progress Navigation**: Visual step-by-step navigation showing the rental process
+- **Loading States**: Smooth loading indicators for better user feedback
+- **Error Handling**: Comprehensive error handling with user-friendly messages
+- **Accessibility**: Built with accessibility best practices in mind
 
-## 📁 Project Structure
+## 🛠️ Technology Stack
 
-```
-src/
-├── components/
-│   └── Header.tsx          # Main progress header component
-├── App.tsx
-└── main.tsx
-```
+### Frontend Framework & Core
 
-## 🎨 Design System
+- **React 19.1.0** - Latest React with modern features and improved performance
+- **TypeScript 5.8.3** - Type-safe JavaScript for better development experience
+- **Vite 6.3.5** - Fast build tool and development server with HMR (Hot Module Replacement)
 
-### Color Scheme
+### Styling & UI
 
-- **Background**: Black (`bg-black`)
-- **Active Step**: Black background with white text
-- **Completed Steps**: Light gray background with black text
-- **Future Steps**: White background with black text and hover effects
+- **Tailwind CSS 3.4.17** - Utility-first CSS framework for rapid UI development
+- **Tailwind Animate** - Additional animation utilities for Tailwind CSS
+- **PostCSS** - CSS post-processor for enhanced styling capabilities
+- **Framer Motion 12.16.0** - Production-ready motion library for React animations
 
-### Responsive Breakpoints
+### UI Components & Icons
 
-- **Mobile**: Base styles
-- **Tablet**: `sm:` prefix (640px+)
-- **Desktop**: `md:` prefix (768px+)
-- **Large Desktop**: `lg:` prefix (1024px+)
+- **Radix UI** - Unstyled, accessible UI primitives
+  - `@radix-ui/react-dropdown-menu` - Accessible dropdown menus
+  - `@radix-ui/react-slot` - Flexible slot composition
+- **Lucide React 0.513.0** - Beautiful & consistent icon library
+- **Class Variance Authority 0.7.1** - Building type-safe component APIs
+- **clsx 2.1.1** & **tailwind-merge 3.3.0** - Utility libraries for conditional classes
 
-## ⚡ Performance Features
+### Data Management
 
-### React Optimization
+- **Axios 1.9.0** - Promise-based HTTP client for API requests
 
-- **Memoized Arrays**: Steps array wrapped in `useMemo` to prevent re-creation
-- **Computed Values**: Current step index cached to avoid repeated calculations
-- **Efficient Transitions**: Reduced animation complexity for smoother performance
+### Development Tools
 
-### CSS Optimization
+- **ESLint 9.25.0** - Code linting and quality assurance
+- **TypeScript ESLint 8.30.1** - TypeScript-specific linting rules
+- **Autoprefixer** - CSS vendor prefixing
+- **Vite Plugin React SWC** - Fast React refresh with SWC compiler
 
-- **Simplified Animations**: Fast color transitions instead of complex transforms
-- **Reduced GPU Usage**: Removed scale transforms that cause repaints
-- **Optimized Shadows**: Minimal shadow effects for better performance
+## 📋 Prerequisites
 
-## 🚀 Getting Started
+Before you begin, ensure you have the following installed on your system:
 
-### Prerequisites
+- **Node.js** (version 18.0.0 or higher)
+- **npm** (version 8.0.0 or higher) or **yarn** (version 1.22.0 or higher)
 
-- Node.js (v16 or higher)
-- npm or yarn
+## 🚀 Installation
 
-### Installation
-
-1. Clone the repository
+### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/onuryilmaaz/waste.git
 cd waste
 ```
 
-2. Install dependencies
+### 2. Install Dependencies
+
+Using npm:
 
 ```bash
 npm install
 ```
 
-3. Start development server
+Using yarn:
+
+```bash
+yarn install
+```
+
+### 3. Start the Development Server
+
+Using npm:
 
 ```bash
 npm run dev
 ```
 
-4. Open your browser and navigate to `http://localhost:5173`
+Using yarn:
+
+```bash
+yarn dev
+```
+
+The application will be available at `http://localhost:5173`
 
 ## 📝 Available Scripts
 
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run preview` - Preview production build
-- `npm run lint` - Run ESLint
+| Script            | Description                                        |
+| ----------------- | -------------------------------------------------- |
+| `npm run dev`     | Starts the development server with hot reload      |
+| `npm run build`   | Builds the app for production to the `dist` folder |
+| `npm run preview` | Serves the production build locally for testing    |
+| `npm run lint`    | Runs ESLint to check for code quality issues       |
+
+## 🏗️ Project Structure
+
+```
+waste/
+├── public/                 # Static assets
+│   └── vite.svg           # Vite logo
+├── src/                   # Source code
+│   ├── assets/           # Static assets (images, etc.)
+│   ├── components/       # Reusable UI components
+│   │   ├── Card.tsx      # Skip card component with pricing and details
+│   │   ├── FilterAndSearch.tsx  # Advanced filtering and search interface
+│   │   ├── Footer.tsx    # Application footer
+│   │   ├── Header.tsx    # Navigation header with progress steps
+│   │   └── LoadingSpinner.tsx  # Loading state component
+│   ├── pages/           # Page components
+│   │   └── ChooseSkipSizePage.tsx  # Main skip selection page
+│   ├── types/           # TypeScript type definitions
+│   │   └── Skip.ts      # Skip and API response interfaces
+│   ├── App.tsx          # Root application component
+│   ├── App.css          # Application-specific styles
+│   ├── index.css        # Global styles and Tailwind directives
+│   ├── main.tsx         # Application entry point
+│   └── vite-env.d.ts    # Vite environment type definitions
+├── index.html            # HTML template
+├── package.json          # Project dependencies and scripts
+├── tailwind.config.js    # Tailwind CSS configuration
+├── tsconfig.json         # TypeScript configuration
+├── tsconfig.app.json     # App-specific TypeScript config
+├── tsconfig.node.json    # Node.js TypeScript config
+├── vite.config.ts        # Vite configuration
+├── postcss.config.js     # PostCSS configuration
+├── eslint.config.js      # ESLint configuration
+└── README.md            # Project documentation
+```
 
 ## 🔧 Configuration
 
-### Tailwind CSS
+### Environment Variables
 
-The project uses Tailwind CSS with custom configuration in `tailwind.config.js` for:
+The application currently connects to the API endpoint:
 
-- Custom color palette
-- Responsive breakpoints
+```
+https://app.wewantwaste.co.uk/api/skips/by-location?postcode=NR32&area=Lowestoft
+```
+
+To configure different API endpoints or add environment-specific settings, create a `.env` file in the root directory:
+
+```env
+VITE_API_BASE_URL=https://your-api-endpoint.com
+VITE_DEFAULT_POSTCODE=NR32
+VITE_DEFAULT_AREA=Lowestoft
+```
+
+### Tailwind CSS Customization
+
+The project includes custom Tailwind configurations in `tailwind.config.js`:
+
+- Custom border width (3px)
+- Enhanced box shadows (3xl shadow)
+- Dark mode support
 - Animation utilities
 
-### TypeScript
+## 🌟 Key Features Explained
 
-Configured with strict mode for better type safety and development experience.
+### Skip Data Management
 
-## 📱 Responsive Design
+The application fetches and displays skip rental data including:
 
-The Header component is fully responsive with:
+- Skip size (in cubic yards)
+- Hire period (in days)
+- Pricing information (before VAT and including VAT)
+- Transport costs and per-tonne pricing
+- Location and area coverage
+- Special permissions (road allowance, heavy waste capability)
 
-- **Mobile**: Icon-only steps with compact spacing
-- **Tablet**: Icon + text with medium spacing
-- **Desktop**: Full layout with optimal spacing and hover effects
+### Advanced Filtering System
 
-## 🎯 Future Enhancements
+Users can filter skips by multiple criteria:
 
-- Add step validation
-- Implement routing between steps
-- Add form state management
-- Integrate with backend APIs
-- Add accessibility improvements
+- **Heavy Waste Capability**: Filter skips that allow or don't allow heavy waste
+- **Road Permission**: Filter skips allowed or not allowed on roads
+- **Price Range**: Set minimum and maximum price filters
+- **Size Range**: Filter by yard size (minimum and maximum)
+- **Text Search**: Search by size, area, or capability keywords
+
+### Responsive Design
+
+The application features a fully responsive grid layout:
+
+- Mobile: 1 column
+- Small screens: 1 column
+- Medium screens: 2 columns
+- Large screens: 3 columns
+- Extra large screens: 4 columns
+
+### Animation & Interactions
+
+Built with Framer Motion for smooth animations:
+
+- Card hover effects
+- Smooth transitions between states
+- Loading animations
+- Filter and search result animations
+
+## 🚀 Building for Production
+
+To create a production build:
+
+```bash
+npm run build
+```
+
+This will:
+
+1. Run TypeScript compilation
+2. Build the application using Vite
+3. Generate optimized static files in the `dist` directory
+
+To preview the production build locally:
+
+```bash
+npm run preview
+```
+
+## 🐛 Troubleshooting
+
+### Common Issues
+
+1. **Dependencies Installation Errors**
+
+   ```bash
+   # Clear npm cache
+   npm cache clean --force
+
+   # Delete node_modules and reinstall
+   rm -rf node_modules package-lock.json
+   npm install
+   ```
+
+2. **Build Errors**
+
+   ```bash
+   # Check TypeScript errors
+   npm run lint
+
+   # Ensure all dependencies are installed
+   npm install
+   ```
+
+3. **Development Server Issues**
+
+   ```bash
+   # Kill any processes on port 5173
+   lsof -ti:5173 | xargs kill -9
+
+   # Restart development server
+   npm run dev
+   ```
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
 ## 📄 License
 
-This project is licensed under the MIT License.
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## 🔗 Related Links
+
+- [React Documentation](https://react.dev)
+- [Vite Documentation](https://vitejs.dev)
+- [Tailwind CSS Documentation](https://tailwindcss.com)
+- [TypeScript Documentation](https://www.typescriptlang.org)
+- [Framer Motion Documentation](https://www.framer.com/motion)
+
+---
+
+**Built with ❤️ using modern web technologies**
